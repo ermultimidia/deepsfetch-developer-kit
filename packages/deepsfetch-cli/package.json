@@ -1,0 +1,46 @@
+{
+  "name": "@deepsfetch/cli",
+  "version": "1.0.0",
+  "description": "Official command-line client for the DeepSFetch API v2",
+  "license": "MIT",
+  "author": "DeepSFetch",
+  "homepage": "https://deepsfetch.com/docs",
+  "type": "module",
+  "bin": {
+    "deepsfetch": "bin/deepsfetch.js"
+  },
+  "files": [
+    "bin",
+    "src",
+    "README.md",
+    "LICENSE"
+  ],
+  "engines": {
+    "node": ">=20.3"
+  },
+  "dependencies": {
+    "@deepsfetch/sdk": "^1.0.0"
+  },
+  "publishConfig": {
+    "access": "public",
+    "registry": "https://registry.npmjs.org/"
+  },
+  "scripts": {
+    "test": "node --test",
+    "prepublishOnly": "npm test"
+  },
+  "keywords": [
+    "deepsfetch",
+    "cli",
+    "web-scraping",
+    "api-client"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/ermultimidia/deepsfetch-developer-kit.git",
+    "directory": "packages/deepsfetch-cli"
+  },
+  "bugs": {
+    "url": "https://github.com/ermultimidia/deepsfetch-developer-kit/issues"
+  }
+}

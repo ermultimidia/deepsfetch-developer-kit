@@ -1,0 +1,7 @@
+{
+  "url": "https://example.com",
+  "formats": ["markdown"],
+  "plannedLane": "http_basic",
+  "async": true,
+  "costControl": { "maxCredits": 3, "allowFallback": false, "cacheMode": "fresh" }
+}

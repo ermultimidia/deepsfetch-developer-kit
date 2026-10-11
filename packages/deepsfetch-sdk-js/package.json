@@ -1,0 +1,42 @@
+{
+  "name": "@deepsfetch/sdk",
+  "version": "1.0.0",
+  "description": "Official JavaScript client for the DeepSFetch API v2",
+  "license": "MIT",
+  "type": "module",
+  "main": "./src/index.js",
+  "types": "./src/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./src/index.d.ts",
+      "import": "./src/index.js"
+    }
+  },
+  "files": [
+    "src",
+    "README.md",
+    "LICENSE"
+  ],
+  "publishConfig": {
+    "access": "public"
+  },
+  "engines": {
+    "node": ">=20"
+  },
+  "scripts": {
+    "test": "node --test"
+  },
+  "keywords": [
+    "deepsfetch",
+    "web-scraping",
+    "api-client"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/ermultimidia/deepsfetch-developer-kit.git",
+    "directory": "packages/deepsfetch-sdk-js"
+  },
+  "bugs": {
+    "url": "https://github.com/ermultimidia/deepsfetch-developer-kit/issues"
+  }
+}

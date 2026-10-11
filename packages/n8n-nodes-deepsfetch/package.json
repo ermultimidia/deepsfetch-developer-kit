@@ -1,0 +1,48 @@
+{
+  "name": "n8n-nodes-deepsfetch",
+  "version": "0.1.0",
+  "description": "Collect, validate and automate web data with DeepSFetch",
+  "license": "MIT",
+  "author": {
+    "name": "DeepSFetch"
+  },
+  "homepage": "https://deepsfetch.com/docs/n8n",
+  "publishConfig": {
+    "access": "public",
+    "registry": "https://registry.npmjs.org/"
+  },
+  "scripts": {
+    "prepublishOnly": "node --check dist/nodes/DeepSFetch/DeepSFetch.node.js && node --check dist/credentials/DeepSFetchApi.credentials.js"
+  },
+  "keywords": [
+    "n8n-community-node-package"
+  ],
+  "files": [
+    "dist",
+    "README.md",
+    "LICENSE"
+  ],
+  "n8n": {
+    "n8nNodesApiVersion": 1,
+    "credentials": [
+      "dist/credentials/DeepSFetchApi.credentials.js"
+    ],
+    "nodes": [
+      "dist/nodes/DeepSFetch/DeepSFetch.node.js"
+    ]
+  },
+  "peerDependencies": {
+    "n8n-workflow": "*"
+  },
+  "engines": {
+    "node": ">=20"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/ermultimidia/deepsfetch-developer-kit.git",
+    "directory": "packages/n8n-nodes-deepsfetch"
+  },
+  "bugs": {
+    "url": "https://github.com/ermultimidia/deepsfetch-developer-kit/issues"
+  }
+}

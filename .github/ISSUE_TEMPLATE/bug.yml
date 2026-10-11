@@ -1,0 +1,19 @@
+name: Relatar problema
+description: Informe um problema reproduzível no SDK, na CLI ou nos exemplos
+body:
+  - type: markdown
+    attributes:
+      value: Não inclua chaves de API, URLs privadas nem respostas de clientes. Relate vulnerabilidades pelo canal privado indicado em SECURITY.md.
+  - type: input
+    id: version
+    attributes:
+      label: Versão da ferramenta e do ambiente de execução
+    validations:
+      required: true
+  - type: textarea
+    id: reproduction
+    attributes:
+      label: Como reproduzir com dados públicos ou fictícios
+      description: Inclua o comando ou código mínimo, o resultado esperado e o resultado recebido. Remova credenciais.
+    validations:
+      required: true
