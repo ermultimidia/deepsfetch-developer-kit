@@ -1,0 +1,20 @@
+{
+  "at": "2026-10-11T19:37:05.984Z",
+  "provider": "deepsfetch",
+  "case": "quotes-javascript",
+  "url": "https://quotes.toscrape.com/js/",
+  "elapsedMs": 16696,
+  "jobId": "job_8d096186-ca3b-414e-872c-3d8a34da7617",
+  "collectionStrategy": "enhanced",
+  "reportedCredits": 1,
+  "markdownPresent": true,
+  "markdownCharacters": 1743,
+  "markdownBytes": 1788,
+  "markdownSha256": "aa3e60740d56c37d7d9caacf7812fb2b6b94f1014b4985928883a05cdff564a8",
+  "expectedMarkers": 3,
+  "matchedMarkers": 3,
+  "publicCardTools": 9,
+  "unauthenticatedExecutionStatus": 401,
+  "passed": true,
+  "actualUsageCredits": 1
+}

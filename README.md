@@ -91,3 +91,5 @@ As ferramentas deste kit usam a licença MIT. O serviço hospedado tem seus pró
 ## Teste e participe
 
 Veja o [tutorial de primeira coleta](docs/first-collection.md), a [verificação operacional reproduzível](docs/benchmark.md) e [relate seu primeiro uso](https://github.com/ermultimidia/deepsfetch-developer-kit/issues/new?template=first-run.yml).
+
+A [comparação autenticada com o Firecrawl](docs/comparison.md) inclui resultados, limitações e código reproduzível. O [tutorial publicado no DEV](https://dev.to/rafael_souza_2f0438f4d82e/from-a-url-to-markdown-a-first-collection-and-mcp-setup-with-deepsfetch-4jdn) acompanha cadastro, primeira coleta e MCP. Encontre também a [listagem no Smithery](https://smithery.ai/servers/ermultimidia/deepsfetch), com instruções e limites no [guia MCP](docs/mcp.md).

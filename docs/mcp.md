@@ -51,7 +51,17 @@ O MCP 2.0.1 aceita o ID público `job_` de uma coleta scrape concluída em `sour
 {"url":"https://example.com","formats":["markdown"],"plannedLane":"http_basic","async":true,"costControl":{"maxCredits":3,"allowFallback":false,"cacheMode":"fresh"}}
 ```
 
-Consulte o schema da ferramenta antes de enviar opções: search, interact e watch não oferecem o mesmo suporte a limites de créditos. A coleta pode retornar referências de artefatos em vez de Markdown inline; confira o conteúdo disponível e use as exportações do painel quando necessário.
+Consulte o schema antes de enviar opções: `scrape` e `search` expõem `costControl`; `interact` e `watch` não oferecem o mesmo controle. O `scrape` do MCP 2.0.1 usa o caminho legado e não aceita os seletores `engine` da API HTTP V2. A coleta pode retornar referências de artefatos em vez de Markdown inline; confira o conteúdo disponível e use as exportações do painel quando necessário.
+
+## Smithery: configurar sua própria chave
+
+1. Abra [DeepSFetch no Smithery](https://smithery.ai/servers/ermultimidia/deepsfetch).
+2. Adicione ao seu toolbox e escolha **Set up**.
+3. No campo **Deepsfetch Authorization**, informe `Bearer SUA_CHAVE`, incluindo o prefixo e o espaço. Use uma chave do seu espaço de trabalho DeepSFetch.
+4. Conclua a configuração e confira se a conexão está ativa antes de chamar ferramentas. Se aparecer **Attention** ou **Set up**, a autenticação ainda não foi concluída.
+5. Liste as ferramentas e execute o primeiro uso descrito acima. Revogue a chave no painel DeepSFetch ao encerrar o acesso.
+
+A listagem foi publicada com nove ferramentas descobertas pelo cartão público de metadados. Isso não comprova execução pelo proxy do Smithery: a conexão de QA ficou pendente e foi removida. O fluxo remoto direto `initialize` → `tools/list` → `scrape` → `job_status` foi validado separadamente. Nenhuma chave compartilhada é fornecida aos visitantes.
 
 ## Registro oficial
 

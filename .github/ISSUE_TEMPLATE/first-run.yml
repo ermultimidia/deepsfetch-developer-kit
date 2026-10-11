@@ -6,11 +6,26 @@ body:
     attributes:
       value: "Obrigado por testar. Relate somente dados que você deseja tornar públicos. Não envie chaves, cookies, dados de clientes ou respostas brutas."
   - type: dropdown
+    id: discovery_channel
+    attributes:
+      label: Onde conheceu o DeepSFetch? / Discovery channel
+      options:
+        - DEV Community
+        - GitHub
+        - Smithery / MCP registry
+        - X / Twitter
+        - LinkedIn
+        - YouTube
+        - Outro / Other
+    validations:
+      required: true
+  - type: dropdown
     id: integration
     attributes:
       label: Como você usou? / Integration
       options:
         - Exemplo JavaScript
+        - Tutorial DEV / HTTP auto engine
         - SDK JavaScript
         - CLI
         - SDK Python

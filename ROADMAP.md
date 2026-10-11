@@ -11,6 +11,9 @@
 - [ ] Dez usuários independentes, com primeira coleta e segunda utilização medidas.
 - [ ] Melhorar acesso a conteúdo por máquina: referências de artefatos não são Markdown inline.
 - [ ] Publicar Python no PyPI e preparar verificação do node n8n.
-- [ ] Comparação de qualidade e custo com concorrentes sob condições iguais.
+- [x] Comparação inicial autenticada com o Firecrawl: cinco páginas, duas rodadas, conteúdo, tempo e créditos reportados.
+- [x] Tutorial publicado no DEV e listagem publicada no Smithery com nove ferramentas.
+- [ ] Reduzir diferenças de velocidade e conteúdo identificadas na comparação; ampliar a amostra e comparar preço monetário.
+- [ ] Validar chamadas pelo proxy do Smithery; a publicação de metadados não comprova execução.
 
 Estrelas e downloads não substituem uso real. Testes de QA não são contabilizados como usuários independentes.

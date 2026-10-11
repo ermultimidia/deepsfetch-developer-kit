@@ -11,6 +11,9 @@
 - [ ] Ten independent users, measuring first completion and second use.
 - [ ] Improve machine access to content: artifact references are not inline Markdown.
 - [ ] Publish Python on PyPI and prepare n8n node verification.
-- [ ] Compare content quality and costs with competitors under identical conditions.
+- [x] Initial authenticated Firecrawl comparison: five pages, two rounds, content, latency and reported credits.
+- [x] Published DEV tutorial and Smithery listing with nine tools.
+- [ ] Reduce speed and content gaps found in the comparison; expand the sample and compare monetary prices.
+- [ ] Validate calls through Smithery's proxy; metadata publication does not establish execution.
 
 Stars and downloads do not replace real usage. QA tests are not independent users.

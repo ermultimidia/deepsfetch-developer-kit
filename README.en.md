@@ -91,3 +91,5 @@ MIT license applies to the tools in this repository. Using the hosted service is
 ## Try it and share feedback
 
 Read the [first-collection tutorial](docs/first-collection.en.md), run the [operational smoke test](docs/benchmark.en.md), and [share your first-run experience](https://github.com/ermultimidia/deepsfetch-developer-kit/issues/new?template=first-run.yml).
+
+The [authenticated Firecrawl comparison](docs/comparison.en.md) includes results, limitations and reproducible code. The [published DEV tutorial](https://dev.to/rafael_souza_2f0438f4d82e/from-a-url-to-markdown-a-first-collection-and-mcp-setup-with-deepsfetch-4jdn) walks through signup, first collection and MCP. Also see the [Smithery listing](https://smithery.ai/servers/ermultimidia/deepsfetch), with instructions and limits in the [MCP guide](docs/mcp.en.md).

@@ -12,4 +12,4 @@ O script coleta três páginas públicas, sequencialmente, com HTTP, cache `fres
 
 O relatório mede conclusão, tempo até o resultado e presença de metadados de artefatos. Não mede exatidão do Markdown, cobertura de JavaScript, extração com IA ou estabilidade em escala. São três páginas, uma execução por página, sem distribuição estatística. Os tempos incluem consultas a cada dois segundos. Referências `r2://` não são downloads públicos.
 
-Os [resultados iniciais](../benchmarks/smoke-20261011.json) usam o próprio DeepSFetch. Não há comparação com o Firecrawl: nenhum teste desse concorrente foi executado. Uma comparação futura precisa de mesmas páginas, condições e métricas de qualidade, com falhas e custos incluídos.
+Os [resultados iniciais](../benchmarks/smoke-20261011.json) usam apenas o DeepSFetch. Posteriormente foi concluída uma [comparação autenticada com o Firecrawl](comparison.md), com cinco páginas, duas rodadas e métricas de conteúdo. São relatórios separados: este smoke test continua sendo uma verificação operacional do DeepSFetch.

@@ -51,7 +51,17 @@ The MCP schema now preserves `plannedLane` and `costControl`. For your first scr
 {"url":"https://example.com","formats":["markdown"],"plannedLane":"http_basic","async":true,"costControl":{"maxCredits":3,"allowFallback":false,"cacheMode":"fresh"}}
 ```
 
-Inspect each tool's schema: search, interact and watch do not offer the same credit-cap support. A result may contain artifact references instead of inline Markdown. Inspect available content and use dashboard exports where needed.
+Inspect each tool's schema: `scrape` and `search` expose `costControl`; `interact` and `watch` do not offer the same control. MCP 2.0.1 `scrape` uses the legacy path and does not accept the HTTP V2 API's `engine` selectors. A result may contain artifact references instead of inline Markdown. Inspect available content and use dashboard exports where needed.
+
+## Smithery: configure your own key
+
+1. Open [DeepSFetch on Smithery](https://smithery.ai/servers/ermultimidia/deepsfetch).
+2. Add it to your toolbox and select **Set up**.
+3. Enter `Bearer YOUR_API_KEY` in **Deepsfetch Authorization**, including the prefix and space. Use a key from your DeepSFetch workspace.
+4. Complete setup and check that the connection is active before invoking tools. **Attention** or **Set up** means authentication is still incomplete.
+5. List tools and follow the first-use steps above. Revoke the key in the DeepSFetch dashboard when access ends.
+
+The listing was published with nine tools discovered through its public metadata card. This does not establish execution through Smithery's proxy: the QA connection remained pending and was removed. Direct remote `initialize` → `tools/list` → `scrape` → `job_status` was validated separately. Visitors are not given a shared key.
 
 ## Official registry
 
