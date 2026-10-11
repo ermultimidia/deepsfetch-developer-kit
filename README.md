@@ -2,6 +2,8 @@
 
 # Kit de desenvolvimento DeepSFetch
 
+**[Manual completo: 33 guias passo a passo](docs/manual/README.md)** — API, MCP, SDKs, CLI, coleções, monitores, arquivos, integrações e cobrança.
+
 **Colete conteúdo da web para agentes de IA e automações com limites explícitos de créditos.**
 
 Este kit reúne clientes JavaScript e Python de código aberto, uma ferramenta de linha de comando (CLI) e a integração n8n para a [API hospedada do DeepSFetch](https://deepsfetch.com/?lang=pt-BR). Comece com uma página HTML pública, confira o resultado e conecte aos seus projetos.

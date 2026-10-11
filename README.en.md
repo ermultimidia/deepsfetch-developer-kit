@@ -2,6 +2,8 @@
 
 # DeepSFetch Developer Kit
 
+**[Complete manual: 33 step-by-step guides](docs/manual/README.en.md)** — API, MCP, SDKs, CLI, collections, monitors, files, integrations and billing.
+
 **Collect web content for AI agents and automation with explicit credit limits.**
 
 Open-source JavaScript and Python clients, a CLI, and n8n integration code for the [hosted DeepSFetch API](https://deepsfetch.com/). Start with one public HTML page, inspect the result, and build from there.

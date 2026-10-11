@@ -1,0 +1,2350 @@
+{
+  "openapi": "3.1.0",
+  "info": {
+    "title": "DeepSFetch API",
+    "version": "2.0.0",
+    "description": "DeepSFetch public API and machine integration contracts. Dashboard-domain adapters declare their own servers. Provider limitations and operational guides: https://deepsfetch.com/docs"
+  },
+  "servers": [
+    {
+      "url": "https://api.deepsfetch.com"
+    }
+  ],
+  "security": [
+    {
+      "bearerAuth": []
+    }
+  ],
+  "paths": {
+    "/v2/scrape": {
+      "post": {
+        "operationId": "scrape",
+        "summary": "Scrape a URL",
+        "parameters": [
+          {
+            "name": "Idempotency-Key",
+            "in": "header",
+            "required": false,
+            "schema": {
+              "type": "string",
+              "minLength": 8,
+              "maxLength": 255
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ScrapeRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Completed",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Job"
+                }
+              }
+            }
+          },
+          "202": {
+            "description": "Accepted",
+            "headers": {
+              "Location": {
+                "schema": {
+                  "type": "string"
+                }
+              }
+            },
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Job"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "409": {
+            "description": "Idempotency conflict, credit cap exceeded or cost_operation_unsupported. Inspect the error code."
+          },
+          "429": {
+            "description": "Rate limited"
+          },
+          "503": {
+            "description": "Provider unavailable"
+          }
+        },
+        "externalDocs": {
+          "url": "https://deepsfetch.com/docs/scrape"
+        }
+      }
+    },
+    "/v2/extract": {
+      "post": {
+        "operationId": "extract",
+        "summary": "Extract structured data from a fetch job",
+        "parameters": [
+          {
+            "name": "Idempotency-Key",
+            "in": "header",
+            "required": false,
+            "schema": {
+              "type": "string",
+              "minLength": 8,
+              "maxLength": 255
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ExtractRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Completed",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Job"
+                }
+              }
+            }
+          },
+          "202": {
+            "description": "Accepted",
+            "headers": {
+              "Location": {
+                "schema": {
+                  "type": "string"
+                }
+              }
+            },
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Job"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "409": {
+            "description": "Idempotency conflict, credit cap exceeded or cost_operation_unsupported. Inspect the error code."
+          },
+          "429": {
+            "description": "Rate limited"
+          },
+          "503": {
+            "description": "Provider unavailable"
+          }
+        },
+        "externalDocs": {
+          "url": "https://deepsfetch.com/docs/extract"
+        }
+      }
+    },
+    "/v2/search": {
+      "post": {
+        "operationId": "search",
+        "summary": "Search the web",
+        "parameters": [
+          {
+            "name": "Idempotency-Key",
+            "in": "header",
+            "required": false,
+            "schema": {
+              "type": "string",
+              "minLength": 8,
+              "maxLength": 255
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/SearchRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Completed",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Job"
+                }
+              }
+            }
+          },
+          "202": {
+            "description": "Accepted",
+            "headers": {
+              "Location": {
+                "schema": {
+                  "type": "string"
+                }
+              }
+            },
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Job"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "409": {
+            "description": "Idempotency conflict, credit cap exceeded or cost_operation_unsupported. Inspect the error code."
+          },
+          "429": {
+            "description": "Rate limited"
+          },
+          "503": {
+            "description": "Provider unavailable"
+          }
+        },
+        "externalDocs": {
+          "url": "https://deepsfetch.com/docs/search"
+        },
+        "description": "30 DeepSFetch credits per successful search request, including zero matches, up to 20 results. Failed provider calls are not charged. Scraping is a separate operation. Use Idempotency-Key to replay without an additional charge."
+      }
+    },
+    "/v2/map": {
+      "post": {
+        "operationId": "map",
+        "summary": "Discover URLs on a site",
+        "parameters": [
+          {
+            "name": "Idempotency-Key",
+            "in": "header",
+            "required": false,
+            "schema": {
+              "type": "string",
+              "minLength": 8,
+              "maxLength": 255
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UrlJobRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Completed",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Job"
+                }
+              }
+            }
+          },
+          "202": {
+            "description": "Accepted",
+            "headers": {
+              "Location": {
+                "schema": {
+                  "type": "string"
+                }
+              }
+            },
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Job"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "409": {
+            "description": "Idempotency conflict, credit cap exceeded or cost_operation_unsupported. Inspect the error code."
+          },
+          "429": {
+            "description": "Rate limited"
+          },
+          "503": {
+            "description": "Provider unavailable"
+          }
+        },
+        "externalDocs": {
+          "url": "https://deepsfetch.com/docs/map"
+        }
+      }
+    },
+    "/v2/crawl": {
+      "post": {
+        "operationId": "crawl",
+        "summary": "Crawl a site asynchronously",
+        "parameters": [
+          {
+            "name": "Idempotency-Key",
+            "in": "header",
+            "required": false,
+            "schema": {
+              "type": "string",
+              "minLength": 8,
+              "maxLength": 255
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UrlJobRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "202": {
+            "description": "Accepted",
+            "headers": {
+              "Location": {
+                "schema": {
+                  "type": "string"
+                }
+              }
+            },
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Job"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "409": {
+            "description": "Idempotency conflict, credit cap exceeded or cost_operation_unsupported. Inspect the error code."
+          },
+          "429": {
+            "description": "Rate limited"
+          },
+          "503": {
+            "description": "Provider unavailable"
+          }
+        },
+        "externalDocs": {
+          "url": "https://deepsfetch.com/docs/crawl"
+        }
+      }
+    },
+    "/v2/interact": {
+      "post": {
+        "operationId": "interact",
+        "summary": "Run browser actions",
+        "parameters": [
+          {
+            "name": "Idempotency-Key",
+            "in": "header",
+            "required": false,
+            "schema": {
+              "type": "string",
+              "minLength": 8,
+              "maxLength": 255
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/InteractRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Completed",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Job"
+                }
+              }
+            }
+          },
+          "202": {
+            "description": "Accepted",
+            "headers": {
+              "Location": {
+                "schema": {
+                  "type": "string"
+                }
+              }
+            },
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Job"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "409": {
+            "description": "Idempotency conflict, credit cap exceeded or cost_operation_unsupported. Inspect the error code."
+          },
+          "429": {
+            "description": "Rate limited"
+          },
+          "503": {
+            "description": "Provider unavailable"
+          }
+        },
+        "externalDocs": {
+          "url": "https://deepsfetch.com/docs/interact"
+        }
+      }
+    },
+    "/v2/watch": {
+      "post": {
+        "operationId": "watch",
+        "summary": "Create a monitored URL",
+        "parameters": [
+          {
+            "name": "Idempotency-Key",
+            "in": "header",
+            "required": false,
+            "schema": {
+              "type": "string",
+              "minLength": 8,
+              "maxLength": 255
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/WatchRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "202": {
+            "description": "Accepted",
+            "headers": {
+              "Location": {
+                "schema": {
+                  "type": "string"
+                }
+              }
+            },
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Job"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "409": {
+            "description": "Idempotency conflict, credit cap exceeded or cost_operation_unsupported. Inspect the error code."
+          },
+          "429": {
+            "description": "Rate limited"
+          },
+          "503": {
+            "description": "Provider unavailable"
+          }
+        },
+        "externalDocs": {
+          "url": "https://deepsfetch.com/docs/watch"
+        }
+      }
+    },
+    "/v2/jobs/{jobId}": {
+      "get": {
+        "operationId": "getJob",
+        "summary": "Get job status or result",
+        "parameters": [
+          {
+            "name": "jobId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "pattern": "^job_[0-9a-f-]+$"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Completed",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Job"
+                }
+              }
+            }
+          },
+          "202": {
+            "description": "Accepted",
+            "headers": {
+              "Location": {
+                "schema": {
+                  "type": "string"
+                }
+              }
+            },
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Job"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "429": {
+            "description": "Rate limited"
+          },
+          "503": {
+            "description": "Provider unavailable"
+          }
+        },
+        "externalDocs": {
+          "url": "https://deepsfetch.com/docs/jobs"
+        }
+      }
+    },
+    "/v2/jobs/{jobId}/cancel": {
+      "post": {
+        "operationId": "cancelJob",
+        "summary": "Cancel a queued or running job",
+        "parameters": [
+          {
+            "name": "jobId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "pattern": "^job_[0-9a-f-]+$"
+            }
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Accepted",
+            "headers": {
+              "Location": {
+                "schema": {
+                  "type": "string"
+                }
+              }
+            },
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Job"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "429": {
+            "description": "Rate limited"
+          },
+          "503": {
+            "description": "Provider unavailable"
+          }
+        },
+        "description": "Changes public queued/running job state only. Does not interrupt the internal engine/provider or reverse usage already started.",
+        "externalDocs": {
+          "url": "https://deepsfetch.com/docs/jobs"
+        }
+      }
+    },
+    "/v2/cost/estimate": {
+      "post": {
+        "summary": "Estimate credit usage without executing a collection",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "required": [
+                  "kind"
+                ],
+                "properties": {
+                  "kind": {
+                    "enum": [
+                      "fetch",
+                      "scrape",
+                      "map",
+                      "crawl",
+                      "collection",
+                      "structured",
+                      "extract",
+                      "search"
+                    ]
+                  },
+                  "limit": {
+                    "type": "integer",
+                    "minimum": 1,
+                    "maximum": 500
+                  },
+                  "plannedLane": {
+                    "enum": [
+                      "http_basic",
+                      "cf_browser",
+                      "unlocker_http",
+                      "managed_browser"
+                    ],
+                    "default": "http_basic"
+                  },
+                  "costControl": {
+                    "type": "object",
+                    "properties": {
+                      "maxCredits": {
+                        "type": "integer",
+                        "minimum": 0,
+                        "description": "Additional task credit cap. External AI provider costs are excluded."
+                      },
+                      "cacheMode": {
+                        "enum": [
+                          "fresh",
+                          "prefer"
+                        ]
+                      },
+                      "maxAgeSeconds": {
+                        "type": "integer",
+                        "minimum": 0,
+                        "maximum": 86400
+                      },
+                      "allowFallback": {
+                        "type": "boolean"
+                      },
+                      "taskId": {
+                        "type": "string",
+                        "description": "Optional shared task identifier for a multi-step operation in this workspace."
+                      }
+                    }
+                  },
+                  "aiMode": {
+                    "enum": [
+                      "managed",
+                      "byok"
+                    ]
+                  },
+                  "mode": {
+                    "enum": [
+                      "page",
+                      "byok"
+                    ]
+                  },
+                  "sources": {
+                    "type": "array",
+                    "minItems": 1,
+                    "maxItems": 5,
+                    "uniqueItems": true,
+                    "items": {
+                      "enum": [
+                        "web",
+                        "news",
+                        "images",
+                        "developer",
+                        "research"
+                      ]
+                    },
+                    "description": "Combine Web, News, Images, Developer and Research. Developer and Research use domain filters without additional DeepSFetch credits."
+                  },
+                  "source": {
+                    "enum": [
+                      "web",
+                      "news",
+                      "images"
+                    ],
+                    "default": "web",
+                    "description": "Web pages, news articles or images. One provider request per search."
+                  },
+                  "category": {
+                    "enum": [
+                      "general",
+                      "developer",
+                      "research"
+                    ],
+                    "default": "general",
+                    "description": "Domain allowlist for Web results; use general with News or Images. No additional DeepSFetch credits."
+                  },
+                  "collectionEngine": {
+                    "enum": [
+                      "auto",
+                      "premium"
+                    ],
+                    "description": "Opt in to the independent 1-credit engine. Basic and browser retries included. Premium requires a prior failed offer and explicit 12-credit approval."
+                  },
+                  "engineStrategy": {
+                    "enum": [
+                      "auto",
+                      "basic",
+                      "enhanced"
+                    ],
+                    "default": "auto"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Credit range, assumptions, caps and currently available monthly budget",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CostEstimate"
+                }
+              }
+            }
+          }
+        },
+        "operationId": "estimateCost",
+        "externalDocs": {
+          "url": "https://deepsfetch.com/docs/costs"
+        }
+      }
+    },
+    "/integration/n8n/connection": {
+      "servers": [
+        {
+          "url": "https://deepsfetch.com"
+        }
+      ],
+      "get": {
+        "operationId": "n8nConnection",
+        "summary": "Check workspace key",
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "connected": {
+                      "type": "boolean"
+                    },
+                    "workspaceId": {
+                      "type": "string"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Invalid credentials",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AdapterError"
+                }
+              }
+            }
+          }
+        },
+        "externalDocs": {
+          "url": "https://deepsfetch.com/docs/authentication"
+        }
+      }
+    },
+    "/integration/n8n/start": {
+      "servers": [
+        {
+          "url": "https://deepsfetch.com"
+        }
+      ],
+      "post": {
+        "operationId": "n8nStart",
+        "summary": "start a template collection",
+        "externalDocs": {
+          "url": "https://deepsfetch.com/docs/n8n-api"
+        },
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "required": [
+                  "config",
+                  "idempotencyKey"
+                ],
+                "properties": {
+                  "config": {
+                    "$ref": "#/components/schemas/N8nConfig"
+                  },
+                  "idempotencyKey": {
+                    "type": "string",
+                    "minLength": 8,
+                    "maxLength": 160,
+                    "pattern": "^[a-zA-Z0-9:_-]+$"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "202": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/N8nJob"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid input",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AdapterError"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Invalid credentials",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AdapterError"
+                }
+              }
+            }
+          },
+          "409": {
+            "description": "Conflict or credit cap",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AdapterError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/integration/n8n/result": {
+      "servers": [
+        {
+          "url": "https://deepsfetch.com"
+        }
+      ],
+      "post": {
+        "operationId": "n8nResult",
+        "summary": "result a template collection",
+        "externalDocs": {
+          "url": "https://deepsfetch.com/docs/n8n-api"
+        },
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "required": [
+                  "config",
+                  "id"
+                ],
+                "properties": {
+                  "config": {
+                    "$ref": "#/components/schemas/N8nConfig"
+                  },
+                  "id": {
+                    "type": "string",
+                    "minLength": 8,
+                    "maxLength": 100,
+                    "pattern": "^[a-zA-Z0-9_-]+$"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/N8nJob"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid input",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AdapterError"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Invalid credentials",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AdapterError"
+                }
+              }
+            }
+          },
+          "409": {
+            "description": "Conflict or credit cap",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AdapterError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/integration/n8n/estimate": {
+      "servers": [
+        {
+          "url": "https://deepsfetch.com"
+        }
+      ],
+      "post": {
+        "operationId": "n8nEstimate",
+        "summary": "estimate a template collection",
+        "externalDocs": {
+          "url": "https://deepsfetch.com/docs/n8n-api"
+        },
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "required": [
+                  "config"
+                ],
+                "properties": {
+                  "config": {
+                    "$ref": "#/components/schemas/N8nConfig"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CostEstimate"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid input",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AdapterError"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Invalid credentials",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AdapterError"
+                }
+              }
+            }
+          },
+          "409": {
+            "description": "Conflict or credit cap",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AdapterError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/collection-feed/{collectionId}/documents": {
+      "servers": [
+        {
+          "url": "https://deepsfetch.com"
+        }
+      ],
+      "get": {
+        "operationId": "collectionDocuments",
+        "summary": "Read up to 10 collection documents",
+        "externalDocs": {
+          "url": "https://deepsfetch.com/docs/collection-feeds"
+        },
+        "parameters": [
+          {
+            "name": "collectionId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          },
+          {
+            "name": "after",
+            "in": "query",
+            "schema": {
+              "type": "string",
+              "maxLength": 64
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "documents": {
+                      "type": "array",
+                      "items": {
+                        "$ref": "#/components/schemas/CollectionDocument"
+                      }
+                    },
+                    "nextCursor": {
+                      "type": [
+                        "string",
+                        "null"
+                      ]
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid cursor",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AdapterError"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Invalid credentials",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AdapterError"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Collection not found in this workspace",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AdapterError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/collection-feed/{collectionId}/changes": {
+      "servers": [
+        {
+          "url": "https://deepsfetch.com"
+        }
+      ],
+      "get": {
+        "operationId": "collectionChanges",
+        "summary": "Read up to 10 collection changes",
+        "externalDocs": {
+          "url": "https://deepsfetch.com/docs/collection-feeds"
+        },
+        "parameters": [
+          {
+            "name": "collectionId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          },
+          {
+            "name": "after",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "minimum": 0
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "changes": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "sequence": {
+                            "type": "integer"
+                          },
+                          "kind": {
+                            "enum": [
+                              "added",
+                              "updated",
+                              "removed"
+                            ]
+                          },
+                          "document": {
+                            "$ref": "#/components/schemas/CollectionDocument"
+                          }
+                        }
+                      }
+                    },
+                    "cursor": {
+                      "type": "integer"
+                    },
+                    "hasMore": {
+                      "type": "boolean"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid cursor",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AdapterError"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Invalid credentials",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AdapterError"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Collection not found in this workspace",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AdapterError"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "securitySchemes": {
+      "bearerAuth": {
+        "type": "http",
+        "scheme": "bearer",
+        "bearerFormat": "DeepSFetch API key"
+      }
+    },
+    "schemas": {
+      "CommonOptions": {
+        "type": "object",
+        "properties": {
+          "async": {
+            "type": "boolean",
+            "default": false
+          },
+          "webhook": {
+            "$ref": "#/components/schemas/Webhook"
+          },
+          "geo": {
+            "type": "object",
+            "properties": {
+              "country": {
+                "type": "string"
+              },
+              "region": {
+                "type": "string"
+              },
+              "city": {
+                "type": "string"
+              },
+              "language": {
+                "type": "string"
+              }
+            },
+            "deprecated": true,
+            "description": "Legacy common option. Not forwarded by the HTML adapter or recognized by the current browser runtime. Do not rely on it to customize execution."
+          },
+          "session": {
+            "type": "object",
+            "required": [
+              "id"
+            ],
+            "properties": {
+              "id": {
+                "type": "string"
+              },
+              "ttlSeconds": {
+                "type": "integer",
+                "minimum": 60,
+                "maximum": 86400
+              }
+            },
+            "deprecated": true,
+            "description": "Legacy common option. Not forwarded by the HTML adapter or recognized by the current browser runtime. Do not rely on it to customize execution."
+          },
+          "device": {
+            "enum": [
+              "desktop",
+              "mobile",
+              "tablet"
+            ],
+            "deprecated": true,
+            "description": "Legacy common option. Not forwarded by the HTML adapter or recognized by the current browser runtime. Do not rely on it to customize execution."
+          },
+          "render": {
+            "oneOf": [
+              {
+                "type": "boolean"
+              },
+              {
+                "type": "object",
+                "properties": {
+                  "waitMs": {
+                    "type": "integer"
+                  },
+                  "waitFor": {
+                    "type": "string"
+                  },
+                  "timeoutMs": {
+                    "type": "integer"
+                  }
+                }
+              }
+            ],
+            "description": "For scrape, true or an object selects browser runtime. Nested wait/timeout settings are not runtime settings: use top-level timeoutMs and waitUntil. Browser runtime does not support credit caps."
+          },
+          "costControl": {
+            "type": "object",
+            "properties": {
+              "maxCredits": {
+                "type": "integer",
+                "minimum": 0,
+                "description": "Additional task credit cap. External AI provider costs are excluded.",
+                "maximum": 1000000000
+              },
+              "cacheMode": {
+                "enum": [
+                  "fresh",
+                  "prefer"
+                ]
+              },
+              "maxAgeSeconds": {
+                "type": "integer",
+                "minimum": 0,
+                "maximum": 86400
+              },
+              "allowFallback": {
+                "type": "boolean",
+                "description": "Set false to restrict fallback. General estimation includes fallback unless false; quickstart forces false."
+              },
+              "taskId": {
+                "type": "string",
+                "description": "Shared task budget identifier within the workspace. Use a new ID per logical run; distinct from idempotency.",
+                "minLength": 1,
+                "maxLength": 160,
+                "pattern": "^[a-zA-Z0-9:_-]+$"
+              }
+            },
+            "description": "Supported on compatible scrape/map/crawl/extract, independent collection engine and current search paths. Legacy browser runtime/interact and V2 watch creation reject credit caps. External AI costs excluded."
+          }
+        }
+      },
+      "Webhook": {
+        "type": "object",
+        "required": [
+          "url",
+          "secret"
+        ],
+        "properties": {
+          "url": {
+            "type": "string",
+            "format": "uri"
+          },
+          "secret": {
+            "type": "string",
+            "minLength": 16
+          },
+          "metadata": {
+            "type": "object",
+            "additionalProperties": {
+              "type": "string"
+            },
+            "description": "Accepted configuration metadata is not included in the current delivered event payload."
+          }
+        },
+        "description": "See https://deepsfetch.com/docs/webhooks for HMAC verification and delivery limitations. No automatic webhook retry in the current delivery chain."
+      },
+      "ScrapeRequest": {
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/CommonOptions"
+          },
+          {
+            "type": "object",
+            "required": [
+              "url"
+            ],
+            "properties": {
+              "url": {
+                "type": "string",
+                "format": "uri"
+              },
+              "formats": {
+                "type": "array",
+                "items": {
+                  "enum": [
+                    "markdown",
+                    "html",
+                    "links",
+                    "screenshot",
+                    "json"
+                  ]
+                },
+                "description": "Use html/markdown on the HTML path. render or screenshot routes to browser runtime supporting html/markdown/links/screenshot. json is a legacy accepted value without implemented JSON extraction."
+              },
+              "jsonSchema": {
+                "type": "object",
+                "deprecated": true,
+                "description": "Legacy field; structured JSON generation is not implemented by the current scrape adapter/runtime. Use extract or validated templates."
+              },
+              "plannedLane": {
+                "enum": [
+                  "http_basic",
+                  "cf_browser",
+                  "unlocker_http",
+                  "managed_browser"
+                ],
+                "default": "http_basic"
+              },
+              "timeoutMs": {
+                "type": "integer",
+                "minimum": 1000,
+                "maximum": 60000,
+                "default": 30000
+              },
+              "waitUntil": {
+                "enum": [
+                  "domcontentloaded",
+                  "load",
+                  "networkidle0",
+                  "networkidle2"
+                ],
+                "default": "domcontentloaded"
+              },
+              "fullPage": {
+                "type": "boolean",
+                "default": true
+              },
+              "collectionEngine": {
+                "enum": [
+                  "auto",
+                  "premium"
+                ],
+                "description": "Opt in to the independent 1-credit engine. Basic and browser retries included. Premium requires a prior failed offer and explicit 12-credit approval."
+              },
+              "engineStrategy": {
+                "enum": [
+                  "auto",
+                  "basic",
+                  "enhanced"
+                ],
+                "default": "auto"
+              },
+              "premiumSourceJobId": {
+                "type": "string"
+              },
+              "premiumConsent": {
+                "type": "object",
+                "required": [
+                  "credits"
+                ],
+                "properties": {
+                  "credits": {
+                    "const": 12
+                  }
+                }
+              }
+            }
+          }
+        ]
+      },
+      "ExtractRequest": {
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/CommonOptions"
+          },
+          {
+            "type": "object",
+            "required": [
+              "source"
+            ],
+            "properties": {
+              "source": {
+                "type": "object",
+                "required": [
+                  "type",
+                  "jobId"
+                ],
+                "properties": {
+                  "type": {
+                    "const": "fetch_job"
+                  },
+                  "jobId": {
+                    "type": "string",
+                    "minLength": 1
+                  }
+                }
+              },
+              "schema": {
+                "type": "object"
+              },
+              "plannedLane": {
+                "enum": [
+                  "http_basic",
+                  "cf_browser",
+                  "unlocker_http",
+                  "managed_browser"
+                ],
+                "default": "http_basic"
+              },
+              "aiMode": {
+                "enum": [
+                  "managed",
+                  "byok"
+                ],
+                "default": "managed"
+              }
+            }
+          }
+        ]
+      },
+      "SearchRequest": {
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/CommonOptions"
+          },
+          {
+            "type": "object",
+            "required": [
+              "query"
+            ],
+            "properties": {
+              "query": {
+                "type": "string"
+              },
+              "limit": {
+                "type": "integer",
+                "minimum": 1,
+                "maximum": 20,
+                "default": 10
+              },
+              "scrapeResults": {
+                "type": "boolean",
+                "enum": [
+                  false
+                ],
+                "description": "Use /v2/scrape separately. Combined search and scraping is not supported."
+              },
+              "source": {
+                "enum": [
+                  "web",
+                  "news",
+                  "images"
+                ],
+                "default": "web",
+                "description": "Web pages, news articles or images. One provider request per search."
+              },
+              "category": {
+                "enum": [
+                  "general",
+                  "developer",
+                  "research"
+                ],
+                "default": "general",
+                "description": "Domain allowlist for Web results; use general with News or Images. No additional DeepSFetch credits."
+              },
+              "sources": {
+                "type": "array",
+                "minItems": 1,
+                "maxItems": 5,
+                "uniqueItems": true,
+                "items": {
+                  "enum": [
+                    "web",
+                    "news",
+                    "images",
+                    "developer",
+                    "research"
+                  ]
+                },
+                "description": "Combine Web, News, Images, Developer and Research. Developer and Research use domain filters without additional DeepSFetch credits."
+              }
+            }
+          }
+        ]
+      },
+      "UrlJobRequest": {
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/CommonOptions"
+          },
+          {
+            "type": "object",
+            "required": [
+              "url"
+            ],
+            "properties": {
+              "url": {
+                "type": "string",
+                "format": "uri"
+              },
+              "limit": {
+                "type": "integer",
+                "minimum": 1,
+                "maximum": 500,
+                "description": "Effective adapter maximum: 500. Higher values fail with provider_limit_exceeded."
+              },
+              "include": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              },
+              "exclude": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              },
+              "maxDepth": {
+                "type": "integer",
+                "minimum": 0,
+                "maximum": 10,
+                "description": "Forwarded to the map/crawl adapter."
+              },
+              "includeSubdomains": {
+                "type": "boolean"
+              },
+              "respectRobots": {
+                "type": "boolean"
+              },
+              "useSitemap": {
+                "type": "boolean"
+              }
+            }
+          }
+        ]
+      },
+      "InteractRequest": {
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/CommonOptions"
+          },
+          {
+            "type": "object",
+            "required": [
+              "url",
+              "actions"
+            ],
+            "properties": {
+              "url": {
+                "type": "string",
+                "format": "uri"
+              },
+              "actions": {
+                "type": "array",
+                "minItems": 1,
+                "maxItems": 20,
+                "items": {
+                  "$ref": "#/components/schemas/BrowserAction"
+                },
+                "description": "Effective browser runtime limit is 20 actions."
+              },
+              "formats": {
+                "type": "array",
+                "minItems": 1,
+                "maxItems": 4,
+                "items": {
+                  "enum": [
+                    "html",
+                    "markdown",
+                    "links",
+                    "screenshot"
+                  ]
+                }
+              },
+              "timeoutMs": {
+                "type": "integer",
+                "minimum": 1000,
+                "maximum": 60000,
+                "default": 30000
+              },
+              "waitUntil": {
+                "enum": [
+                  "domcontentloaded",
+                  "load",
+                  "networkidle0",
+                  "networkidle2"
+                ],
+                "default": "domcontentloaded"
+              },
+              "fullPage": {
+                "type": "boolean",
+                "default": true
+              },
+              "redactSelectors": {
+                "type": "array",
+                "maxItems": 20,
+                "items": {
+                  "type": "string",
+                  "minLength": 1,
+                  "maxLength": 500
+                }
+              }
+            }
+          }
+        ]
+      },
+      "WatchRequest": {
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/CommonOptions"
+          },
+          {
+            "type": "object",
+            "required": [
+              "url",
+              "schedule"
+            ],
+            "properties": {
+              "url": {
+                "type": "string",
+                "format": "uri"
+              },
+              "schedule": {
+                "type": "string",
+                "minLength": 3,
+                "maxLength": 128,
+                "description": "Minute interval only, e.g. 15m, 1min or 60m; 1–525600 minutes. Cron expressions are unsupported.",
+                "examples": [
+                  "15m",
+                  "1min",
+                  "60m"
+                ]
+              },
+              "changeThreshold": {
+                "type": "number",
+                "minimum": 0,
+                "maximum": 1,
+                "deprecated": true,
+                "description": "Accepted legacy field, ignored by the current adapter. Text and HTML use a fixed change policy."
+              }
+            }
+          }
+        ]
+      },
+      "Job": {
+        "type": "object",
+        "required": [
+          "id",
+          "kind",
+          "status",
+          "createdAt"
+        ],
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "kind": {
+            "enum": [
+              "scrape",
+              "extract",
+              "search",
+              "map",
+              "crawl",
+              "interact",
+              "watch"
+            ]
+          },
+          "status": {
+            "enum": [
+              "queued",
+              "running",
+              "completed",
+              "failed",
+              "cancelled"
+            ]
+          },
+          "result": {
+            "type": [
+              "object",
+              "null"
+            ],
+            "description": "Provider-specific output. V1 adapter: provider, operation, providerJobId, status, statusUrl, result, meta. Inspect inner status for partial completion; browser shape differs."
+          },
+          "error": {
+            "type": [
+              "object",
+              "null"
+            ],
+            "properties": {
+              "code": {
+                "type": "string"
+              },
+              "message": {
+                "type": "string"
+              }
+            }
+          },
+          "createdAt": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "startedAt": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "completedAt": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "cancelledAt": {
+            "type": [
+              "string",
+              "null"
+            ]
+          }
+        }
+      },
+      "Error": {
+        "type": "object",
+        "required": [
+          "error"
+        ],
+        "properties": {
+          "error": {
+            "type": "object",
+            "required": [
+              "code",
+              "message",
+              "requestId"
+            ],
+            "properties": {
+              "code": {
+                "type": "string"
+              },
+              "message": {
+                "type": "string"
+              },
+              "requestId": {
+                "type": "string"
+              }
+            }
+          }
+        }
+      },
+      "BrowserAction": {
+        "oneOf": [
+          {
+            "type": "object",
+            "required": [
+              "type",
+              "selector"
+            ],
+            "properties": {
+              "type": {
+                "const": "click"
+              },
+              "selector": {
+                "type": "string",
+                "minLength": 1,
+                "maxLength": 500
+              }
+            }
+          },
+          {
+            "type": "object",
+            "required": [
+              "type",
+              "selector",
+              "text"
+            ],
+            "properties": {
+              "type": {
+                "const": "type"
+              },
+              "selector": {
+                "type": "string",
+                "minLength": 1,
+                "maxLength": 500
+              },
+              "text": {
+                "type": "string",
+                "maxLength": 10000
+              },
+              "clear": {
+                "type": "boolean",
+                "default": false
+              }
+            }
+          },
+          {
+            "type": "object",
+            "required": [
+              "type"
+            ],
+            "anyOf": [
+              {
+                "required": [
+                  "milliseconds"
+                ]
+              },
+              {
+                "required": [
+                  "selector"
+                ]
+              }
+            ],
+            "properties": {
+              "type": {
+                "const": "wait"
+              },
+              "selector": {
+                "type": "string",
+                "minLength": 1,
+                "maxLength": 500
+              },
+              "milliseconds": {
+                "type": "integer",
+                "minimum": 0,
+                "maximum": 10000
+              }
+            }
+          },
+          {
+            "type": "object",
+            "required": [
+              "type",
+              "y"
+            ],
+            "properties": {
+              "type": {
+                "const": "scroll"
+              },
+              "selector": {
+                "type": "string",
+                "minLength": 1,
+                "maxLength": 500
+              },
+              "x": {
+                "type": "integer",
+                "minimum": -100000,
+                "maximum": 100000,
+                "default": 0
+              },
+              "y": {
+                "type": "integer",
+                "minimum": -100000,
+                "maximum": 100000
+              }
+            }
+          },
+          {
+            "type": "object",
+            "required": [
+              "type",
+              "key"
+            ],
+            "properties": {
+              "type": {
+                "const": "press"
+              },
+              "selector": {
+                "type": "string",
+                "minLength": 1,
+                "maxLength": 500
+              },
+              "key": {
+                "type": "string",
+                "minLength": 1,
+                "maxLength": 40
+              }
+            }
+          },
+          {
+            "type": "object",
+            "required": [
+              "type"
+            ],
+            "properties": {
+              "type": {
+                "const": "screenshot"
+              },
+              "fullPage": {
+                "type": "boolean",
+                "default": false
+              },
+              "redactSelectors": {
+                "type": "array",
+                "maxItems": 20,
+                "items": {
+                  "type": "string",
+                  "minLength": 1,
+                  "maxLength": 500
+                }
+              }
+            }
+          }
+        ]
+      },
+      "CostEstimate": {
+        "type": "object",
+        "properties": {
+          "currency": {
+            "const": "credits"
+          },
+          "min": {
+            "type": "number"
+          },
+          "max": {
+            "type": "number"
+          },
+          "allowed": {
+            "type": "boolean"
+          },
+          "reason": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "components": {
+            "type": "array",
+            "items": {
+              "type": "object"
+            }
+          },
+          "monthly": {
+            "type": "object"
+          },
+          "external": {
+            "type": "boolean"
+          },
+          "assumptions": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          }
+        }
+      },
+      "N8nConfig": {
+        "type": "object",
+        "required": [
+          "template",
+          "url"
+        ],
+        "properties": {
+          "template": {
+            "enum": [
+              "price",
+              "documentation",
+              "catalog"
+            ]
+          },
+          "url": {
+            "type": "string",
+            "format": "uri",
+            "description": "Public HTTPS URL; no credentials, IP literal or custom port."
+          },
+          "fields": {
+            "type": "array",
+            "minItems": 1,
+            "maxItems": 20,
+            "items": {
+              "type": "object",
+              "required": [
+                "name",
+                "type",
+                "source",
+                "path"
+              ],
+              "properties": {
+                "name": {
+                  "type": "string",
+                  "pattern": "^[a-zA-Z][a-zA-Z0-9_]{0,47}$"
+                },
+                "type": {
+                  "enum": [
+                    "string",
+                    "number",
+                    "boolean"
+                  ]
+                },
+                "source": {
+                  "enum": [
+                    "css",
+                    "jsonld"
+                  ]
+                },
+                "path": {
+                  "type": "string",
+                  "minLength": 1,
+                  "maxLength": 200
+                },
+                "required": {
+                  "type": "boolean"
+                },
+                "attribute": {
+                  "type": "string"
+                },
+                "description": {
+                  "type": "string",
+                  "maxLength": 300
+                }
+              }
+            }
+          },
+          "maxItems": {
+            "type": "integer",
+            "minimum": 1,
+            "maximum": 100,
+            "default": 50
+          },
+          "itemSelector": {
+            "type": "string",
+            "maxLength": 200
+          },
+          "costControl": {
+            "type": "object",
+            "properties": {
+              "maxCredits": {
+                "type": "integer",
+                "minimum": 0,
+                "description": "Additional task credit cap. External AI provider costs are excluded.",
+                "maximum": 1000000000
+              },
+              "cacheMode": {
+                "enum": [
+                  "fresh",
+                  "prefer"
+                ]
+              },
+              "maxAgeSeconds": {
+                "type": "integer",
+                "minimum": 0,
+                "maximum": 86400
+              },
+              "allowFallback": {
+                "type": "boolean",
+                "description": "Set false to restrict fallback. General estimation includes fallback unless false; quickstart forces false."
+              },
+              "taskId": {
+                "type": "string",
+                "description": "Shared task budget identifier within the workspace. Use a new ID per logical run; distinct from idempotency.",
+                "minLength": 1,
+                "maxLength": 160,
+                "pattern": "^[a-zA-Z0-9:_-]+$"
+              }
+            },
+            "description": "Supported on compatible scrape/map/crawl/extract paths. Browser runtime, interact, search and watch reject caps (including workspace policy) with 409 cost_operation_unsupported. External AI costs excluded."
+          }
+        }
+      },
+      "N8nJob": {
+        "type": "object",
+        "required": [
+          "id",
+          "status",
+          "config"
+        ],
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "status": {
+            "enum": [
+              "queued",
+              "running",
+              "completed",
+              "failed",
+              "cancelled"
+            ]
+          },
+          "config": {
+            "$ref": "#/components/schemas/N8nConfig"
+          },
+          "result": {
+            "type": "object",
+            "description": "Template-specific validated result; check valid before consumption."
+          },
+          "error": {
+            "type": [
+              "string",
+              "null"
+            ]
+          }
+        }
+      },
+      "AdapterError": {
+        "type": "object",
+        "properties": {
+          "error": {
+            "type": "string"
+          }
+        }
+      },
+      "CollectionDocument": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "collectionId": {
+            "type": "string"
+          },
+          "url": {
+            "type": "string"
+          },
+          "title": {
+            "type": "string"
+          },
+          "version": {
+            "type": "integer"
+          },
+          "deleted": {
+            "type": "boolean"
+          },
+          "markdown": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "chunks": {
+            "type": "array",
+            "items": {
+              "type": "object"
+            }
+          },
+          "contentHash": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "fetchedAt": {
+            "type": [
+              "string",
+              "null"
+            ]
+          }
+        }
+      }
+    }
+  },
+  "externalDocs": {
+    "url": "https://deepsfetch.com/docs"
+  }
+}
