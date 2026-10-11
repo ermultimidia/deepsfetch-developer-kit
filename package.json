@@ -9,6 +9,6 @@
   "workspaces": ["packages/deepsfetch-sdk-js", "packages/deepsfetch-cli"],
   "scripts": {
     "test": "node --test packages/deepsfetch-sdk-js/test/client.test.js packages/deepsfetch-cli/test/cli.test.js tests/quickstart.test.mjs",
-    "check": "node --check examples/scrape.mjs && node --check packages/n8n-nodes-deepsfetch/dist/nodes/DeepSFetch/DeepSFetch.node.js && node --check packages/n8n-nodes-deepsfetch/dist/credentials/DeepSFetchApi.credentials.js"
+    "check": "node --check examples/scrape.mjs && node --check examples/benchmark.mjs && node --check packages/n8n-nodes-deepsfetch/dist/nodes/DeepSFetch/DeepSFetch.node.js && node --check packages/n8n-nodes-deepsfetch/dist/credentials/DeepSFetchApi.credentials.js"
   }
 }

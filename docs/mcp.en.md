@@ -39,10 +39,20 @@ Other clients use different configuration formats. Do not copy this file unchang
 3. If the result is pending, follow its documented job status flow.
 4. Inspect the completed result before using it as agent context.
 
-The published documentation lists `scrape`, `extract`, `search`, `map`, `crawl`, `interact`, `watch`, `job_status`, and `cancel_job`. This document is not a live availability test.
+The published documentation lists `scrape`, `extract`, `search`, `map`, `crawl`, `interact`, `watch`, `job_status`, and `cancel_job`. On October 11, 2026 we verified initialize, tools/list and scrape → job_status against the live service. This does not validate every tool or client interface.
 
-## Current extraction limitation
+## Simpler extraction and polling
 
-The documented MCP `extract` flow uses the V1 adapter and an internal fetch ID (`result.providerJobId`). This is different from the outer V2 `job_` ID used by job polling. Use the exact current extraction instructions, or use `/v2/extract` over HTTP when you need V2 job polling. Simplifying this is a roadmap item before broad MCP promotion.
+MCP 2.0.1 accepts the public `job_` ID of a completed scrape in `source.jobId`. It resolves the source automatically and submits extraction through API V2, returning another job queryable with `job_status`. Legacy internal `fetch_` IDs remain accepted. ID resolution and pending-source rejection passed local service-mock tests; this production run did not execute AI extraction.
 
-No npm MCP package or registry listing is asserted here. Connecting a client does not create a chatbot, embeddings or automation destinations. Collection operations consume workspace credits; AI-provider charges may be separate.
+The MCP schema now preserves `plannedLane` and `costControl`. For your first scrape:
+
+```json
+{"url":"https://example.com","formats":["markdown"],"plannedLane":"http_basic","async":true,"costControl":{"maxCredits":3,"allowFallback":false,"cacheMode":"fresh"}}
+```
+
+Inspect each tool's schema: search, interact and watch do not offer the same credit-cap support. A result may contain artifact references instead of inline Markdown. Inspect available content and use dashboard exports where needed.
+
+## Official registry
+
+Published as [io.github.ermultimidia/deepsfetch, version 2.0.1](https://registry.modelcontextprotocol.io/v0.1/servers/io.github.ermultimidia%2Fdeepsfetch/versions/2.0.1). Connection metadata is in [server.json](../server.json). The hosted endpoint requires a workspace API key. Registry presence does not imply a partnership or certification by every client.

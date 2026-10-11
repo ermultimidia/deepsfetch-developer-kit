@@ -38,7 +38,7 @@ O exemplo envia uma coleta de HTML por HTTP com limite de 3 créditos e troca au
 | MCP | [Guia de conexão remota](docs/mcp.md) | Configuração para o servidor MCP hospedado |
 | n8n | [Modelos de fluxo e node comunitário](docs/n8n.md) | Código do node publicado no npm |
 
-A implementação do servidor MCP remoto não está incluída. O node n8n ainda não é verificado pelo n8n. Este kit não anuncia registro em catálogos, parceria nativa nem motor de coleta para hospedagem própria.
+A implementação do servidor MCP remoto não está incluída. O node n8n ainda não é verificado pelo n8n. O MCP remoto está no registro oficial. Este kit não anuncia parceria nativa nem motor de coleta para hospedagem própria.
 
 ## Primeiro uso pela CLI
 
@@ -85,3 +85,7 @@ Os testes usam dados de exemplo e um servidor HTTP local; não enviam coletas pa
 - [Suporte](https://deepsfetch.com/support?lang=pt-BR)
 
 As ferramentas deste kit usam a licença MIT. O serviço hospedado tem seus próprios termos de uso e limites de créditos.
+
+## Teste e participe
+
+Veja o [tutorial de primeira coleta](docs/first-collection.md), a [verificação operacional reproduzível](docs/benchmark.md) e [relate seu primeiro uso](https://github.com/ermultimidia/deepsfetch-developer-kit/issues/new?template=first-run.yml).

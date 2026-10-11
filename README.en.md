@@ -38,7 +38,7 @@ The example submits one HTTP-only collection with a maximum of 3 DeepSFetch cred
 | MCP | [Remote connection guide](docs/mcp.en.md) | Configuration for the hosted MCP endpoint |
 | n8n | [Templates and community node](docs/n8n.en.md) | Source for the npm-published community node |
 
-The remote MCP server implementation is not included here. The n8n node is not verified by n8n. Registry listings, native partnerships and a self-hosted collection engine are not claimed by this repository.
+The remote MCP server implementation is not included here. The n8n node is not verified by n8n. The remote MCP is listed in the official registry. Native partnerships and a self-hosted collection engine are not claimed by this repository.
 
 ## CLI quickstart
 
@@ -85,3 +85,7 @@ Tests use fixtures and a local HTTP server; they do not submit paid collections.
 - [Support](https://deepsfetch.com/support?lang=en)
 
 MIT license applies to the tools in this repository. Using the hosted service is subject to its own terms and credit limits.
+
+## Try it and share feedback
+
+Read the [first-collection tutorial](docs/first-collection.en.md), run the [operational smoke test](docs/benchmark.en.md), and [share your first-run experience](https://github.com/ermultimidia/deepsfetch-developer-kit/issues/new?template=first-run.yml).

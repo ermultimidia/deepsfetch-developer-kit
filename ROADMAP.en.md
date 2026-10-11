@@ -1,18 +1,16 @@
 [Português](ROADMAP.md) | [English](ROADMAP.en.md)
 
-# Developer adoption roadmap
+# Next steps
 
-This is a proposed order of work, not a commitment to delivery dates.
+- [x] Public kit, CI and website link.
+- [x] Free signup → API key → published example completed in production (QA account).
+- [x] MCP 2.0.1: simpler extraction IDs and preserved credit controls.
+- [x] Official MCP registry and Portuguese/English guides.
+- [x] Previous n8n integration test completed; not repeated in this release.
+- [x] Tutorial, reproducible smoke test and first-run feedback form.
+- [ ] Ten independent users, measuring first completion and second use.
+- [ ] Improve machine access to content: artifact references are not inline Markdown.
+- [ ] Publish Python on PyPI and prepare n8n node verification.
+- [ ] Compare content quality and costs with competitors under identical conditions.
 
-- [ ] Publish this developer kit and link the website to its public repository.
-- [ ] Validate signup, workspace key creation and first completed collection with independent users.
-- [ ] Record a short demonstration using a real completed collection.
-- [ ] Publish the Python SDK to PyPI; update installation instructions only after verification.
-- [ ] Simplify MCP extraction and job IDs, then validate each supported client.
-- [ ] Publish metadata for the remote MCP server in the official registry and selected directories.
-- [ ] Publish one complete n8n use case with an importable workflow and tutorial.
-- [ ] Prepare the community node for n8n verification under the current requirements.
-- [ ] Publish a reproducible benchmark including failures, quality, latency and cost.
-- [ ] Evaluate a separately scoped self-hosted collection component.
-
-Initial success measures: time to first completed collection, independent successful users, second-use rate, and reported integration failures. Stars and downloads are supporting signals rather than the primary outcome.
+Stars and downloads do not replace real usage. QA tests are not independent users.

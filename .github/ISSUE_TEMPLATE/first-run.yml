@@ -1,0 +1,44 @@
+name: Primeiro uso / First run
+description: Conte onde conseguiu chegar e onde travou. Never share API keys.
+title: "[Primeiro uso] "
+body:
+  - type: markdown
+    attributes:
+      value: "Obrigado por testar. Relate somente dados que você deseja tornar públicos. Não envie chaves, cookies, dados de clientes ou respostas brutas."
+  - type: dropdown
+    id: integration
+    attributes:
+      label: Como você usou? / Integration
+      options:
+        - Exemplo JavaScript
+        - SDK JavaScript
+        - CLI
+        - SDK Python
+        - MCP
+        - n8n existente
+    validations:
+      required: true
+  - type: dropdown
+    id: milestone
+    attributes:
+      label: Até onde chegou? / Last completed step
+      options:
+        - Cadastro
+        - Chave criada
+        - Primeira tarefa enviada
+        - Primeira coleta concluída
+        - Segunda utilização
+    validations:
+      required: true
+  - type: textarea
+    id: obstacle
+    attributes:
+      label: O que dificultou? / What got in the way?
+      description: Inclua cliente/versão, passos e código de erro sem credenciais.
+    validations:
+      required: true
+  - type: input
+    id: time
+    attributes:
+      label: Tempo até o primeiro resultado / Time to first result
+      placeholder: "Ex.: 4 minutos / 4 minutes"

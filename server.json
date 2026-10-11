@@ -1,0 +1,32 @@
+{
+  "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+  "name": "io.github.ermultimidia/deepsfetch",
+  "title": "DeepSFetch",
+  "description": "Web scraping, extraction and search for AI agents. Hosted MCP with workspace API keys.",
+  "version": "2.0.1",
+  "repository": {
+    "url": "https://github.com/ermultimidia/deepsfetch-developer-kit",
+    "source": "github"
+  },
+  "websiteUrl": "https://deepsfetch.com",
+  "remotes": [
+    {
+      "type": "streamable-http",
+      "url": "https://mcp.deepsfetch.com/mcp",
+      "headers": [
+        {
+          "name": "Authorization",
+          "description": "DeepSFetch workspace API key",
+          "value": "Bearer {api_key}",
+          "variables": {
+            "api_key": {
+              "description": "Create a key at https://deepsfetch.com/app/api-keys",
+              "isSecret": true,
+              "isRequired": true
+            }
+          }
+        }
+      ]
+    }
+  ]
+}

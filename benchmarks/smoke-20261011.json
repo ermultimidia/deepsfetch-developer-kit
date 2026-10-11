@@ -1,0 +1,33 @@
+{
+  "at": "2026-10-11T18:06:11.313Z",
+  "mode": "http_basic/fresh/no-fallback",
+  "measures": "completion and artifact metadata only",
+  "contentQualityMeasured": false,
+  "competitorComparison": false,
+  "rows": [
+    {
+      "url": "https://example.com",
+      "status": "completed",
+      "elapsedMs": 19687,
+      "markdownReference": true,
+      "titlePresent": true,
+      "maxCredits": 3
+    },
+    {
+      "url": "https://deepsfetch.com/docs",
+      "status": "completed",
+      "elapsedMs": 19439,
+      "markdownReference": true,
+      "titlePresent": true,
+      "maxCredits": 3
+    },
+    {
+      "url": "https://deepsfetch.com/docs/mcp",
+      "status": "completed",
+      "elapsedMs": 19282,
+      "markdownReference": true,
+      "titlePresent": true,
+      "maxCredits": 3
+    }
+  ]
+}
