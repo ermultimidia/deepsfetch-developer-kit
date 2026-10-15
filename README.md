@@ -1,68 +1,68 @@
-[Português](README.md) | [English](README.en.md)
+[English](README.md) | [Português](README.pt.md)
 
-# Kit de desenvolvimento DeepSFetch
+# DeepSFetch Developer Kit
 
-**[Manual completo: 33 guias passo a passo](docs/manual/README.md)** — API, MCP, SDKs, CLI, coleções, monitores, arquivos, integrações e cobrança.
+**[Complete manual: 33 step-by-step guides](docs/manual/README.en.md)** — API, MCP, SDKs, CLI, collections, monitors, files, integrations and billing.
 
-**Colete conteúdo da web para agentes de IA e automações com limites explícitos de créditos.**
+**Collect web content for AI agents and automation with explicit credit limits.**
 
-Este kit reúne clientes JavaScript e Python de código aberto, uma ferramenta de linha de comando (CLI) e a integração n8n para a [API hospedada do DeepSFetch](https://deepsfetch.com/?lang=pt-BR). Comece com uma página HTML pública, confira o resultado e conecte aos seus projetos.
+Open-source JavaScript and Python clients, a CLI, and n8n integration code for the [hosted DeepSFetch API](https://deepsfetch.com/). Start with one public HTML page, inspect the result, and build from there.
 
-O kit contém ferramentas de acesso à API. O motor de coleta e o serviço hospedado não estão incluídos. Para executar os exemplos, você precisa de uma conta e de uma chave de API; as coletas consomem créditos do seu espaço de trabalho. Confira os [planos atuais](https://deepsfetch.com/pricing?lang=pt-BR).
+This repository contains client-side tools. The collection engine and hosted service are not included. Running the examples requires a DeepSFetch account and API key; collection consumes workspace credits. See [current plans](https://deepsfetch.com/pricing?lang=en).
 
-## Obtenha seu primeiro resultado
+## Get your first result
 
-Requer Node.js 22 ou superior. Crie uma chave em [Chaves de API](https://deepsfetch.com/app/api-keys?lang=pt-BR). Na pasta principal do kit, configure a chave para a sessão atual do terminal e execute o exemplo sem dependências:
+Requires Node.js 22+. Create a key in [API keys](https://deepsfetch.com/app/api-keys). From the repository root, set it for the current terminal session and run the dependency-free example:
 
 PowerShell:
 
 ```powershell
-$env:DEEPSFETCH_API_KEY = 'SUA_CHAVE_DEEPSFETCH'
+$env:DEEPSFETCH_API_KEY = 'YOUR_DEEPSFETCH_API_KEY'
 node examples/scrape.mjs https://example.com
 ```
 
 macOS / Linux:
 
 ```sh
-export DEEPSFETCH_API_KEY='SUA_CHAVE_DEEPSFETCH'
+export DEEPSFETCH_API_KEY='YOUR_DEEPSFETCH_API_KEY'
 node examples/scrape.mjs https://example.com
 ```
 
-O exemplo envia uma coleta de HTML por HTTP com limite de 3 créditos e troca automática para navegador desativada. Depois acompanha a mesma tarefa até o resultado e imprime o JSON. Esse limite não garante gratuidade nem sucesso da coleta. Páginas que dependem de JavaScript precisam de outra configuração. Consulte [primeiros passos](docs/getting-started.md) para tratar erros e retomar uma tarefa.
+The example submits one HTTP-only collection with a maximum of 3 DeepSFetch credits and browser fallback disabled, then polls the same job. It prints the completed job as JSON. This cap is not a promise of a free or successful collection. JavaScript-dependent pages need another configuration. See [getting started](docs/getting-started.en.md) for failure handling and resuming a job.
 
-## Escolha sua integração
+## Choose your integration
 
-| Ferramenta | Instalação ou guia | O que está incluído |
+| Tool | Install or guide | What is included |
 | --- | --- | --- |
-| SDK JavaScript | `npm install @deepsfetch/sdk` | Cliente da API v2 e acompanhamento de tarefas |
-| CLI | `npm install -g @deepsfetch/cli` | Comandos de coleta, tarefas e estimativas |
-| SDK Python | `python -m pip install ./packages/deepsfetch-sdk-python` | Instalação pelo código-fonte; publicação no PyPI pendente |
-| MCP | [Guia de conexão remota](docs/mcp.md) | Configuração para o servidor MCP hospedado |
-| n8n | [Modelos de fluxo e node comunitário](docs/n8n.md) | Código do node publicado no npm |
+| JavaScript SDK | `npm install @deepsfetch/sdk` | API v2 client and job polling |
+| CLI | `npm install -g @deepsfetch/cli` | Commands for collection, jobs and estimates |
+| Python SDK | `python -m pip install ./packages/deepsfetch-sdk-python` | Source installation; PyPI release pending |
+| MCP | [Remote connection guide](docs/mcp.en.md) | Configuration for the hosted MCP endpoint |
+| n8n | [Templates and community node](docs/n8n.en.md) | Source for the npm-published community node |
 
-A implementação do servidor MCP remoto não está incluída. O node n8n ainda não é verificado pelo n8n. O MCP remoto está no registro oficial. Este kit não anuncia parceria nativa nem motor de coleta para hospedagem própria.
+The remote MCP server implementation is not included here. The n8n node is not verified by n8n. The remote MCP is listed in the official registry. Native partnerships and a self-hosted collection engine are not claimed by this repository.
 
-## Primeiro uso pela CLI
+## CLI quickstart
 
-Depois de instalar a CLI e configurar a chave como mostrado acima:
+After installing the CLI and setting the environment variable above:
 
 ```sh
 deepsfetch scrape --file examples/scrape-request.json --wait
 ```
 
-A CLI informa a chave de idempotência na saída de diagnóstico. Essa chave identifica a operação para evitar duplicação. Se o resultado do envio for desconhecido, repita a mesma requisição com `--idempotency-key A_MESMA_CHAVE`. Se já recebeu o ID da tarefa, use `deepsfetch job ID_DA_TAREFA --wait` para consultar a tarefa existente.
+The CLI writes its idempotency key to stderr. If a submission's outcome is unknown, retry the same request with `--idempotency-key THE_SAME_KEY`. Once you have a job ID, use `deepsfetch job JOB_ID --wait` instead of submitting another collection.
 
-## Ferramentas abertas e serviço hospedado
+## Open tools and hosted service
 
-| Recurso | Neste kit | DeepSFetch hospedado |
+| Capability | In this repository | Hosted DeepSFetch |
 | --- | --- | --- |
-| SDK JavaScript, SDK Python e CLI | Código e testes | Conexão à API v2 |
-| Node comunitário n8n | Implementação em JavaScript | Acesso à integração de coleta |
-| MCP | Guia de conexão | Servidor remoto |
-| Motor de coleta e infraestrutura de navegadores | Não incluídos | Gerenciados pelo DeepSFetch |
-| Contas, créditos, cobrança e painel | Não incluídos | Gerenciados pelo DeepSFetch |
+| JavaScript SDK, Python SDK, CLI | Source and tests | Connect to API v2 |
+| n8n community node | Source distributed as JavaScript | Calls collection integration endpoints |
+| MCP | Connection guide | Remote server |
+| Collection engine, browser infrastructure | Not included | Managed by DeepSFetch |
+| Accounts, credits, billing and dashboard | Not included | Managed by DeepSFetch |
 
-## Desenvolvimento local
+## Develop locally
 
 ```sh
 npm install --ignore-scripts
@@ -70,26 +70,26 @@ npm test
 npm run check
 ```
 
-Para executar os testes Python a partir da pasta principal:
+Run Python tests from the repository root:
 
 ```sh
 python -m pip install ./packages/deepsfetch-sdk-python
 python -m unittest discover -s packages/deepsfetch-sdk-python/tests
 ```
 
-Os testes usam dados de exemplo e um servidor HTTP local; não enviam coletas pagas. Veja como [contribuir](CONTRIBUTING.md), [relatar problemas de segurança](SECURITY.md) e acompanhar as [próximas etapas](ROADMAP.md).
+Tests use fixtures and a local HTTP server; they do not submit paid collections. See [contributing](CONTRIBUTING.md), [security](SECURITY.md), and the [roadmap](ROADMAP.md).
 
-## Links úteis
+## Resources
 
-- [Documentação da API](https://deepsfetch.com/docs?lang=pt-BR)
-- [Playground](https://deepsfetch.com/playground?lang=pt-BR)
-- [Configuração n8n](https://deepsfetch.com/docs/n8n?lang=pt-BR)
-- [Suporte](https://deepsfetch.com/support?lang=pt-BR)
+- [API documentation](https://deepsfetch.com/docs?lang=en)
+- [Playground](https://deepsfetch.com/playground?lang=en)
+- [n8n setup](https://deepsfetch.com/docs/n8n?lang=en)
+- [Support](https://deepsfetch.com/support?lang=en)
 
-As ferramentas deste kit usam a licença MIT. O serviço hospedado tem seus próprios termos de uso e limites de créditos.
+MIT license applies to the tools in this repository. Using the hosted service is subject to its own terms and credit limits.
 
-## Teste e participe
+## Try it and share feedback
 
-Veja o [tutorial de primeira coleta](docs/first-collection.md), a [verificação operacional reproduzível](docs/benchmark.md) e [relate seu primeiro uso](https://github.com/ermultimidia/deepsfetch-developer-kit/issues/new?template=first-run.yml).
+Read the [first-collection tutorial](docs/first-collection.en.md), run the [operational smoke test](docs/benchmark.en.md), and [share your first-run experience](https://github.com/ermultimidia/deepsfetch-developer-kit/issues/new?template=first-run.yml).
 
-A [comparação autenticada com o Firecrawl](docs/comparison.md) inclui resultados, limitações e código reproduzível. O [tutorial publicado no DEV](https://dev.to/rafael_souza_2f0438f4d82e/from-a-url-to-markdown-a-first-collection-and-mcp-setup-with-deepsfetch-4jdn) acompanha cadastro, primeira coleta e MCP. Encontre também a [listagem no Smithery](https://smithery.ai/servers/ermultimidia/deepsfetch), com instruções e limites no [guia MCP](docs/mcp.md).
+The [authenticated Firecrawl comparison](docs/comparison.en.md) includes results, limitations and reproducible code. The [published DEV tutorial](https://dev.to/rafael_souza_2f0438f4d82e/from-a-url-to-markdown-a-first-collection-and-mcp-setup-with-deepsfetch-4jdn) walks through signup, first collection and MCP. Also see the [Smithery listing](https://smithery.ai/servers/ermultimidia/deepsfetch), with instructions and limits in the [MCP guide](docs/mcp.en.md).

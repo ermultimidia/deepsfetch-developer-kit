@@ -2,11 +2,16 @@
   "name": "deepsfetch-developer-kit",
   "version": "0.1.1",
   "private": true,
-  "description": "Ferramentas de código aberto e exemplos para a API hospedada do DeepSFetch",
+  "description": "Open-source tools and examples for the hosted DeepSFetch API",
   "license": "MIT",
   "type": "module",
-  "engines": { "node": ">=22" },
-  "workspaces": ["packages/deepsfetch-sdk-js", "packages/deepsfetch-cli"],
+  "engines": {
+    "node": ">=22"
+  },
+  "workspaces": [
+    "packages/deepsfetch-sdk-js",
+    "packages/deepsfetch-cli"
+  ],
   "scripts": {
     "test": "node --test packages/deepsfetch-sdk-js/test/client.test.js packages/deepsfetch-cli/test/cli.test.js tests/quickstart.test.mjs tests/compare.test.mjs",
     "check": "node --check examples/scrape.mjs && node --check examples/benchmark.mjs && node --check examples/compare.mjs && node --check examples/collect-auto.mjs && node --check packages/n8n-nodes-deepsfetch/dist/nodes/DeepSFetch/DeepSFetch.node.js && node --check packages/n8n-nodes-deepsfetch/dist/credentials/DeepSFetchApi.credentials.js"

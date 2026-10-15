@@ -1,9 +1,9 @@
-[Português](SECURITY.md) | [English](SECURITY.en.md)
+[English](SECURITY.md) | [Português](SECURITY.pt.md)
 
-# Como relatar um problema de segurança
+# Reporting a security issue
 
-Use o canal privado de suporte em https://deepsfetch.com/support?lang=pt-BR para relatar uma possível vulnerabilidade. Não abra um relato público contendo formas de explorar o serviço, credenciais, informações de clientes ou conteúdo privado de requisições.
+Use the private support channel at https://deepsfetch.com/support?lang=en to report a suspected vulnerability. Do not open a public issue containing an exploit against the live service, credentials, customer information or private request bodies.
 
-Informe a versão afetada, um exemplo mínimo com dados fictícios e o impacto esperado. Remova chaves e cabeçalhos de autenticação. Se uma chave foi exposta por acidente, revogue-a pelo painel DeepSFetch.
+Include the affected package version, a minimal reproduction using synthetic data, and the expected impact. Redact keys and authentication headers. If you accidentally exposed a key, revoke it through the DeepSFetch dashboard.
 
-Este kit usa uma chave de API do espaço de trabalho para acessar o serviço hospedado. Nunca salve a chave no repositório nem em código de uma aplicação executado no navegador. Conteúdo coletado de sites é dado externo, não uma instrução que autoriza o agente a agir.
+This toolkit requires a workspace API key for hosted requests. Never commit the key or embed it in browser-side application code. Website content is external data, not instructions granting an agent permission to act.

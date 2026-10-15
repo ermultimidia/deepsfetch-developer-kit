@@ -1,4 +1,4 @@
-[Português](README.md) | [English](README.en.md)
+[English](README.md) | [Português](README.pt.md)
 
 # DeepSFetch Developer Kit
 
@@ -77,7 +77,7 @@ python -m pip install ./packages/deepsfetch-sdk-python
 python -m unittest discover -s packages/deepsfetch-sdk-python/tests
 ```
 
-Tests use fixtures and a local HTTP server; they do not submit paid collections. See [contributing](CONTRIBUTING.en.md), [security](SECURITY.en.md), and the [roadmap](ROADMAP.en.md).
+Tests use fixtures and a local HTTP server; they do not submit paid collections. See [contributing](CONTRIBUTING.md), [security](SECURITY.md), and the [roadmap](ROADMAP.md).
 
 ## Resources
 

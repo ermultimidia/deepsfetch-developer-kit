@@ -1,25 +1,19 @@
-[Português](README.md) | [English](README.en.md)
+[English](README.md) | [Português](README.pt.md)
 
-# DeepSFetch para n8n
+# DeepSFetch for n8n
 
-Colete páginas HTML, extraia campos validados e automatize consultas de preço, atualizações de documentação e coleta de catálogos. Comece em https://deepsfetch.com/app/start?lang=pt-BR e importe o fluxo configurado no n8n.
+Collect HTML pages, extract validated fields, and automate price checks, documentation updates and catalog collection. Start at https://deepsfetch.com/app/start and import the configured workflow into n8n.
 
-## Instalação
+## Installation
 
-No n8n hospedado por você, abra **Configurações → Community Nodes → Install**, informe `n8n-nodes-deepsfetch` e instale. A instância precisa permitir nós comunitários. O pacote ainda não é verificado pelo n8n; no n8n Cloud, use os fluxos com nós HTTP padrão da configuração guiada.
+For self-hosted n8n, open **Settings → Community Nodes → Install**, enter `n8n-nodes-deepsfetch`, and install. Requires an n8n instance that permits community nodes. This package is not verified by n8n; on n8n Cloud use the standard HTTP Request workflows from guided setup instead.
 
-Para instalação manual, execute `npm install n8n-nodes-deepsfetch` no diretório de nós comunitários (normalmente `~/.n8n/nodes`) e reinicie o n8n. Siga a documentação da sua versão. Crie uma credencial DeepSFetch API com uma chave ativa de https://deepsfetch.com/app/api-keys?lang=pt-BR. A chave fica nas credenciais, nunca nos parâmetros do fluxo. Escolha Português no node para receber mensagens de erro em português.
+For manual installation, run `npm install n8n-nodes-deepsfetch` in your n8n community-node directory (typically `~/.n8n/nodes`) and restart n8n. Follow your n8n version's installation documentation. Create a DeepSFetch API credential with an active workspace API key from https://deepsfetch.com/app/api-keys. The key is stored in n8n credentials, never workflow parameters.
 
-## Consumo e execução
+Installing the package does not consume DeepSFetch credits. Your workspace API key authenticates requests and identifies the workspace balance. Collection operations use the same credit rates as the API and dashboard. Repeated requests to inspect an existing result do not submit another collection. Provider AI keys are separate BYOK credentials; external AI charges are not included in DeepSFetch credits.
 
-Instalar o pacote não consome créditos. Sua chave identifica o espaço de trabalho e seu saldo. As coletas usam as mesmas tarifas da API e do painel. Consultar um resultado existente não envia outra coleta. Chaves de IA são credenciais BYOK separadas, e cobranças externas de IA não estão incluídas nos créditos DeepSFetch.
+Operations: Start Collection, Get Result, Estimate Credits. Import templates for a complete Start → Wait → Result loop. A stable idempotency key prevents duplicate submission during retries of the same execution. Waiting is delegated to n8n's Wait node. Workflow timeout is 15 minutes; reuse the returned job ID to inspect a slow job before resubmitting.
 
-O node oferece iniciar coleta, obter resultado e estimar créditos. Importe os modelos para um fluxo completo de início, espera e resultado. Uma chave estável de idempotência evita duplicação nas tentativas da mesma execução. A espera fica a cargo do nó Wait. O prazo do fluxo é de 15 minutos; consulte o ID recebido antes de reenviar uma coleta lenta.
+Each execution handles one URL. Catalogs support up to 100 products on one page, without automatic pagination. JSON-LD Product data or relative CSS selectors are required. Pages requiring JavaScript are outside this HTML-only workflow. Missing/ambiguous fields stop automation for review. Credit caps cover DeepSFetch collection, not external n8n, email or AI charges.
 
-## Limites e configuração dos destinos
-
-Cada execução trata uma URL. Catálogos aceitam até 100 produtos na página, sem paginação automática. São necessários dados Product em JSON-LD ou seletores CSS relativos. Páginas dependentes de JavaScript ficam fora desse fluxo de HTML. Campos ausentes ou ambíguos interrompem a automação para revisão. Os limites de créditos cobrem a coleta DeepSFetch, não os custos externos de n8n, e-mail ou IA.
-
-A comparação de preços e a detecção de mudanças usam dados persistidos pelo fluxo após execuções automáticas bem-sucedidas; testes manuais não salvam o histórico. Evite execuções sobrepostas e use banco persistente para volumes maiores. A primeira execução automática salva a referência; alterações na mesma moeda chegam à saída final. Conecte seu próprio nó de alerta.
-
-O fluxo de documentação entrega origem, IDs estáveis, hash e trechos do conteúdo. Conecte o destino de IA desejado. E-mail, embeddings e chatbot não são criados automaticamente. O fluxo vem desativado: teste, conecte o destino e confira frequência e fuso horário antes de ativar.
+Price comparison and document change detection use workflow static data, which persists only after successful automatic executions, not manual tests. Avoid overlapping executions. Use a durable database in higher-volume workflows. The first automatic price run sets a baseline; a change within the same currency reaches the final output. Connect your own alert node. Documentation delivers source, stable IDs, content hash and chunks; connect your own AI destination. No email, embeddings or chatbot is provisioned automatically.

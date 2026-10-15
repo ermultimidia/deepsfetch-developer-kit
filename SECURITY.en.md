@@ -1,4 +1,4 @@
-[Português](SECURITY.md) | [English](SECURITY.en.md)
+[English](SECURITY.md) | [Português](SECURITY.pt.md)
 
 # Reporting a security issue
 

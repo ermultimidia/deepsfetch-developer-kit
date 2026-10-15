@@ -1,10 +1,10 @@
-[Português](README.md) | [English](README.en.md)
+[English](README.md) | [Português](README.pt.md)
 
-# SDK Python do DeepSFetch
+# DeepSFetch Python SDK
 
-Cliente sem dependências para Python 3.10 ou superior, conectado à API v2 hospedada do DeepSFetch.
+Dependency-free Python 3.10+ client for the hosted DeepSFetch API v2.
 
-A publicação no PyPI está pendente. Na pasta principal deste kit, instale pelo código-fonte:
+The PyPI release is pending. From the developer kit repository root, install the included source:
 
 ```sh
 python -m pip install ./packages/deepsfetch-sdk-python
@@ -21,13 +21,13 @@ job = client.scrape(
      "async": True, "costControl": {"maxCredits": 3, "allowFallback": False}},
     idempotency_key=str(uuid.uuid4()),
 )
-print("ID da tarefa:", job["id"])
+print("Job ID:", job["id"])
 result = job if job["status"] in ("completed", "failed", "cancelled") else client.wait_for_job(job["id"])
 if result["status"] != "completed":
-    raise RuntimeError("A coleta não foi concluída; consulte o mesmo ID de tarefa")
+    raise RuntimeError("Collection did not complete; inspect the same job ID")
 print(result["result"])
 ```
 
-Coletas consomem créditos do seu espaço de trabalho. Este exemplo coleta páginas HTML públicas, sem troca automática para navegador. Guarde o ID recebido para retomar a consulta sem criar outra coleta.
+Collection consumes DeepSFetch workspace credits. This example is for public HTML pages, without browser fallback. Keep the returned job ID to resume polling rather than creating another collection.
 
-O cliente também oferece `extract`, `search`, `map`, `crawl`, `interact`, `watch`, `estimate_cost`, `get_job`, `cancel_job` e `wait_for_job`. Requisições POST não são repetidas automaticamente. Reutilize a mesma chave de idempotência ao repetir o envio da mesma operação. Os erros são instâncias de `DeepSFetchError` com `status`, `code`, `details` e `request_id`.
+The client also provides `extract`, `search`, `map`, `crawl`, `interact`, `watch`, `estimate_cost`, `get_job`, `cancel_job`, and `wait_for_job`. POST calls are not retried automatically. Preserve the same idempotency key when retrying the same submission. Errors are `DeepSFetchError` instances with `status`, `code`, `details`, and `request_id`.

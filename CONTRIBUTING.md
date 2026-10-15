@@ -1,14 +1,14 @@
-[Português](CONTRIBUTING.md) | [English](CONTRIBUTING.en.md)
+[English](CONTRIBUTING.md) | [Português](CONTRIBUTING.pt.md)
 
-# Como contribuir
+# Contributing
 
-Contribuições úteis incluem erros reproduzíveis dos clientes, exemplos mais claros, correções de documentação e melhorias nas integrações.
+Useful contributions include reproducible client bugs, clearer examples, documentation fixes and integration improvements.
 
-1. Descreva o problema e a versão da ferramenta e do ambiente em um relato no repositório.
-2. Faça uma alteração focada em uma ramificação própria.
-3. Execute as verificações descritas no README principal.
-4. Explique o comportamento alterado e como foi validado ao enviar sua proposta de alteração.
+1. Describe the problem and affected client/runtime version in an issue.
+2. Make a focused change in a branch.
+3. Run the checks documented in the root README.
+4. Explain the changed behavior and validation in your pull request.
 
-Use respostas de exemplo ou um servidor local nos testes. Os testes não devem exigir chave de produção nem enviar requisições pagas. Para verificações manuais em produção, use sua própria conta, uma URL pública e um limite explícito de créditos.
+Use fixture responses or a local server for tests. Tests must not require a production API key or submit billable requests. For manual live checks, use your own account, a public URL and an explicit credit cap.
 
-Não inclua credenciais, dados de clientes nem respostas completas de produção. Para problemas do serviço hospedado, use https://deepsfetch.com/support?lang=pt-BR. As contribuições para este kit seguem a licença MIT.
+Do not include credentials, customer data or full production responses. For a hosted-service issue, use https://deepsfetch.com/support?lang=en. Contributions to this toolkit are under its MIT license.

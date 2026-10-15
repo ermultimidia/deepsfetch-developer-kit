@@ -1,4 +1,4 @@
-[Português](README.md) | [English](README.en.md)
+[English](README.md) | [Português](README.pt.md)
 
 # DeepSFetch JavaScript SDK
 

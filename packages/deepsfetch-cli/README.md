@@ -1,58 +1,52 @@
-[Português](README.md) | [English](README.en.md)
+[English](README.md) | [Português](README.pt.md)
 
-# CLI do DeepSFetch
+# DeepSFetch CLI
 
-Use a API v2 do DeepSFetch pelo CMD, PowerShell, macOS ou Linux. Requer Node.js 20.3 ou superior; para os exemplos completos deste kit, use Node.js 22 ou superior.
+Use DeepSFetch API v2 from CMD, PowerShell, macOS or Linux terminals. Requires Node.js 20.3 or newer.
 
 ```sh
 npm install -g @deepsfetch/cli
 deepsfetch --help
 ```
 
-Crie uma chave em [Chaves de API](https://deepsfetch.com/app/api-keys?lang=pt-BR), salve o valor completo quando ele for exibido e configure no terminal:
+Create an API key in [DeepSFetch → API keys](https://deepsfetch.com/app/api-keys). Save the full key when it is shown. Set it in the environment of your terminal:
 
 ```powershell
-# PowerShell: vale apenas para a sessão atual
-$env:DEEPSFETCH_API_KEY = 'SUA_CHAVE_DEEPSFETCH'
+# PowerShell: applies to the current terminal only
+$env:DEEPSFETCH_API_KEY = 'YOUR_DEEPSFETCH_API_KEY'
 deepsfetch scrape https://example.com --wait
 ```
 
 ```sh
 # macOS / Linux
-export DEEPSFETCH_API_KEY='SUA_CHAVE_DEEPSFETCH'
+export DEEPSFETCH_API_KEY='YOUR_DEEPSFETCH_API_KEY'
 deepsfetch scrape https://example.com --wait
 ```
 
-No CMD, use `set DEEPSFETCH_API_KEY=SUA_CHAVE_DEEPSFETCH`. Não publique nem compartilhe a chave. A chave de um provedor de IA é uma credencial BYOK separada e não autentica a CLI.
+In Windows CMD use `set DEEPSFETCH_API_KEY=YOUR_DEEPSFETCH_API_KEY`. Do not commit API keys, put them in public frontend code, or share them. An AI provider key is a separate BYOK credential and does not authenticate the CLI.
 
-## Comandos
+## Commands
 
 ```sh
 deepsfetch scrape https://example.com --wait
 deepsfetch map https://example.com
 deepsfetch crawl https://example.com --wait
-deepsfetch search "energia renovável"
-deepsfetch job ID_DA_TAREFA
-deepsfetch job ID_DA_TAREFA --wait
-deepsfetch cancel ID_DA_TAREFA
+deepsfetch search "renewable energy"
+deepsfetch job JOB_ID
+deepsfetch job JOB_ID --wait
+deepsfetch cancel JOB_ID
 deepsfetch estimate --file estimate.json
 deepsfetch extract --file extract.json --wait
 ```
 
-Para começar com o limite de créditos do exemplo deste kit, execute da pasta principal:
+Use `--file request.json` (recommended across shells) or `--data '{"url":"https://example.com"}'` for the complete API request body. The commands `interact` and `watch` also accept these options. See the [API documentation](https://deepsfetch.com/docs) for fields and supported operations. Successful synchronous responses may not contain a job ID; use `--wait` only for job responses.
 
-```sh
-deepsfetch scrape --file examples/scrape-request.json --wait
-```
+`scrape URL` defaults to HTTP basic, Markdown output and asynchronous execution. Results are JSON on stdout, suitable for files and pipelines. Status and errors go to stderr. `--wait` exits with code 1 for failed/cancelled jobs or a timeout. Other API/validation errors also exit with code 1.
 
-Use `--file request.json` ou `--data '{"url":"https://example.com"}'` para enviar o corpo completo da requisição. `interact` e `watch` também aceitam essas opções. Consulte os campos na [documentação da API](https://deepsfetch.com/docs?lang=pt-BR). Respostas síncronas podem não conter ID de tarefa; use `--wait` apenas quando houver tarefa para acompanhar.
+## Credits and retries
 
-`scrape URL` usa coleta HTTP básica, saída Markdown e execução assíncrona. Os resultados JSON saem em stdout; os diagnósticos e erros, em stderr. `--wait` retorna código 1 em caso de falha, cancelamento ou tempo esgotado. Erros da API e de validação também retornam código 1.
+Installing the CLI does not consume credits. The API key identifies your workspace; operations use the same balance and tariffs as the API and dashboard. In BYOK extraction, page collection still consumes DeepSFetch credits and the AI provider bills your own AI account directly. Eight concurrent requests is a plan limit, not eight free operations.
 
-## Créditos e novas tentativas
+Each submitted operation prints its generated idempotency key to stderr. To retry that same operation after a connection failure, pass `--idempotency-key THE_SAME_KEY`; do not submit a new job just to check progress. The CLI never retries billable POST requests automatically. Query an existing job with `job JOB_ID`.
 
-Instalar a CLI não consome créditos. As operações usam o saldo e as tarifas do seu espaço de trabalho, como na API e no painel. Em extrações BYOK, a coleta ainda consome créditos DeepSFetch e o provedor de IA cobra separadamente na sua conta.
-
-Cada operação informa sua chave de idempotência. Para repetir a mesma operação após falha de conexão, passe `--idempotency-key A_MESMA_CHAVE`. A CLI não repete automaticamente requisições POST pagas. Se já tem o ID, consulte a tarefa existente com `job ID_DA_TAREFA`.
-
-`--timeout-ms` altera o limite por requisição (padrão: 30000 ms). `--max-wait-ms` altera o prazo total de acompanhamento (padrão: 900000 ms). `--base-url` aceita um servidor HTTPS ou HTTP local para testes. Use apenas servidores confiáveis, pois eles recebem sua chave de API.
+`--timeout-ms` changes the request timeout (default 30000); `--max-wait-ms` changes the polling deadline (default 900000). `--base-url` accepts an HTTPS API origin or an HTTP localhost test server. Point it only at a server you trust: it receives the API key.

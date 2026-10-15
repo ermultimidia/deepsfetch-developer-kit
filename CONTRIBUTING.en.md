@@ -1,4 +1,4 @@
-[Português](CONTRIBUTING.md) | [English](CONTRIBUTING.en.md)
+[English](CONTRIBUTING.md) | [Português](CONTRIBUTING.pt.md)
 
 # Contributing
 
