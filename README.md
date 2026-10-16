@@ -2,6 +2,10 @@
 
 # DeepSFetch Developer Kit
 
+> ⭐ **If these n8n workflows, SDKs, or MCP tools save you time, please give this repository a Star on GitHub!** It helps other automation builders discover the toolkit.
+
+![DeepSFetch n8n Workflow — Automated Collection & Price Monitoring](docs/images/n8n-workflow-overview.png)
+
 **[Complete manual: 33 step-by-step guides](docs/manual/README.en.md)** — API, MCP, SDKs, CLI, collections, monitors, files, integrations and billing.
 
 **Collect web content for AI agents and automation with explicit credit limits.**
@@ -9,6 +13,39 @@
 Open-source JavaScript and Python clients, a CLI, and n8n integration code for the [hosted DeepSFetch API](https://deepsfetch.com/). Start with one public HTML page, inspect the result, and build from there.
 
 This repository contains client-side tools. The collection engine and hosted service are not included. Running the examples requires a DeepSFetch account and API key; collection consumes workspace credits. See [current plans](https://deepsfetch.com/pricing?lang=en).
+
+## Ready-to-use n8n Workflows & Community Node
+
+Automate structured HTML extraction in n8n with explicit credit caps, idempotency keys, and field validation before sending data to your alerts, spreadsheets, or AI/RAG pipelines.
+
+| Ready Template | Use Case | What It Extracts & Delivers | Setup & Download |
+| --- | --- | --- | --- |
+| **Price Monitoring** | Track product price changes on a schedule | Validated `name`, `price`, and `currency` (JSON-LD / CSS) with baseline comparison | [Configure & Download JSON](https://deepsfetch.com/app/start?lang=en) · [n8n Guide](docs/n8n.en.md) |
+| **Product Catalog** | Extract up to 100 items from a listing page | Structured item arrays with per-item field validation (no pagination) | [Configure & Download JSON](https://deepsfetch.com/app/start?lang=en) · [n8n Guide](docs/n8n.en.md) |
+| **AI / RAG Documentation** | Feed clean documentation into vector stores or LLMs | Source metadata, stable document IDs, content hash (change detection), and chunks | [Configure & Download JSON](https://deepsfetch.com/app/start?lang=en) · [n8n Guide](docs/n8n.en.md) |
+
+### Install the n8n Community Node (`n8n-nodes-deepsfetch`)
+
+For **self-hosted n8n**, install via the UI (**Settings → Community Nodes → Install** → `n8n-nodes-deepsfetch`) or manually in your community nodes folder:
+
+```sh
+npm install n8n-nodes-deepsfetch
+```
+
+*(Using n8n Cloud? You can download the standard HTTP Request workflow templates directly from [Guided Setup](https://deepsfetch.com/app/start?lang=en) without installing a community node.)*
+
+<details>
+<summary><strong>📸 View n8n Node Configuration & Validated JSON Output Screenshots</strong></summary>
+
+<br>
+
+**1. Starting a Collection (`Start Collection` operation with payload & language selection):**
+![DeepSFetch Start Collection Node in n8n](docs/images/n8n-start-collection-node.png)
+
+**2. Validated Output & Price Comparison (`Compare price` step with structured JSON result):**
+![DeepSFetch Price Comparison Output in n8n](docs/images/n8n-price-comparison-code.png)
+
+</details>
 
 ## Get your first result
 
@@ -38,7 +75,7 @@ The example submits one HTTP-only collection with a maximum of 3 DeepSFetch cred
 | CLI | `npm install -g @deepsfetch/cli` | Commands for collection, jobs and estimates |
 | Python SDK | `python -m pip install ./packages/deepsfetch-sdk-python` | Source installation; PyPI release pending |
 | MCP | [Remote connection guide](docs/mcp.en.md) | Configuration for the hosted MCP endpoint |
-| n8n | [Templates and community node](docs/n8n.en.md) | Source for the npm-published community node |
+| n8n | `npm install n8n-nodes-deepsfetch` · [Guide](docs/n8n.en.md) | Source for the npm-published community node |
 
 The remote MCP server implementation is not included here. The n8n node is not verified by n8n. The remote MCP is listed in the official registry. Native partnerships and a self-hosted collection engine are not claimed by this repository.
 
